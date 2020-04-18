@@ -1,0 +1,12 @@
+# Remover containers
+
+sudo docker rm $(sudo docker ps -a -q) -f
+
+# Remover imagens
+sudo docker rmi -f $(sudo docker images -q)
+
+# Criar imagem de um container
+sudo docker commit 7d5eefb283bc radson/codeeducation
+
+# Enviar uma imagem para o repositorio
+sudo docker push radson/codeeducation
