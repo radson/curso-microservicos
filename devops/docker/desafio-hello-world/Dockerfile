@@ -1,5 +1,5 @@
 FROM hello-world
 
-ADD hello-world /hello-world
+ADD hello-world /hello
 
-CMD ["./hello-world"]
+CMD ["./hello"]
