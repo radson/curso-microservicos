@@ -1,0 +1,62 @@
+O que é Kubernetes
+
+"Kubernetes (K8s) é um produto Open Source utilizado para automatizar a implantação, o dimensionamento e o gerenciamento de aplicativos em contêiner."
+
+De onde surgiu?
+
+* Durante muitos anos o Google vinha desenvolvendo uma solução para gerencamento de conteiners. Surgiu do Borg, Omega.
+
+Pontos importantes
+
+* Kubernetes é disponibilizado através de um conjunto de APIs
+* Normalmente acessamos a API usando a CLI: kubectl
+* Tudo é baseado em estado. Você configura o estado de cada objeto
+* Kubernetes Master
+** Kube-apiserver
+** Kube-controler-manager
+** Kube-scheduler
+* Outros Nodes:
+** Kubelet
+** Kubeproxy
+
+Dinamica "superficial"
+
+* Clustes: Conjunto de máquinas (nodes)
+* Cada máquina possui uma quantidade de vCPU e memória
+* Pods: Unidade que contém os containers provisionados
+* O Pod representa os processos rodando no cluster
+
+Services
+
+É uma forma de agregar um conjunto de pods para então implementar políticas de visibilidade.
+
+Services: 
+* ClusteIP
+* NodePort
+* LoadBalancer
+* Selectors
+
+Comandos
+
+kubectl get svc
+kubectl get pods
+kubectl get deployments
+kubectl apply -f pod.yaml 
+kubectl get pods
+kubectl logs pod-exemplo
+kubectl get pods
+kubectl get deployments
+kubectl create deployment hello-nginx --image=nginx:1.17-alpine
+kubectl get deployments
+kubectl get pods
+kubectl expose deployment hello-nginx --type=LoadBalancer --port=80
+kubectl get services
+minikube service hello-nginx
+kubectl apply -f deployment.yaml 
+kubectl describe deployment.yaml 
+kubectl describe deployment
+kubectl apply -f deployment.yaml 
+kubectl apply -f deployment.yaml 
+kubectl get deployments
+kubectl get pods
+
