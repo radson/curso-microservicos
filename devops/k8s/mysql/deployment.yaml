@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+    name: mysql-server
+    #labels:
+    #    app: mysql-server
+spec: # spec do deployment
+    replicas: 1
+    selector: # selector utilizado para criar o service
+        matchLabels:
+            app: mysql-server
+            tier: db
+    template: # referente ao POD
+        metadata: 
+            labels: 
+                app: mysql-server
+                tier: db
+        spec: # spec do POD
+            containers:
+            - name: mysql-server
+              image: mysql:5.7
+              args:
+                - "--ignore-db-dir=lost+found" # para o GCP
+              env:
+              - name: MYSQL_ROOT_PASSWORD
+                valueFrom:
+                    secretKeyRef:
+                        name: mysql-pass
+                        key: password
+                #value: root
+              ports:
+              - containerPort: 3306
+
+              volumeMounts: # monta o volume efetivamente
+              - name: mysql-persistent-storage
+                mountPath: /var/lib/mysql
+
+            volumes: #definição do volume
+            - name: mysql-persistent-storage
+              persistentVolumeClaim:
+                claimName: mysql-pv-claim
+            #  configMap: 
+            #    name: nginx-conf
+            #    items:
+            #        - key: nginx.conf
+            #          path: nginx.conf
